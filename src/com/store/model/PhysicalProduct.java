@@ -1,27 +1,47 @@
 package com.store.model;
 
 public class PhysicalProduct extends Product implements Shippable {
+	
+	private double weightKg;
+	private double shippingFeePerKg;
 
-	public PhysicalProduct() {
-		// TODO Auto-generated constructor stub
+	// este constructor le delega a la clase padre a traves del super
+	public PhysicalProduct(String name, double basePrice, String category, double weightKg, double shippingFeePerKg) {
+		super(name, basePrice, category);
+		this.weightKg = weightKg;
+		this.shippingFeePerKg = shippingFeePerKg;
 	}
-
+	
+	// aqui va la implementacion del metodo abstracto de product
+	@Override
+	public double calculateFinalPrice() {
+		return basePrice + getShippingCost();
+	}
+	
 	@Override
 	public String generateTrackingGuide() {
-		// TODO Auto-generated method stub
-		return null;
+		return "SHIPPING-" + getId() + "-" + System.currentTimeMillis() % 10000;
 	}
 
 	@Override
 	public double getShippingCost() {
-		// TODO Auto-generated method stub
-		return 0;
+		return weightKg*shippingFeePerKg;
 	}
+	
+	// getters y setters de la subclase
+    public double getWeightKg() {
+        return weightKg;
+    }
 
-	@Override
-	public int compareTo(Product o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public void setWeightKg(double weightKg) {
+        this.weightKg = weightKg;
+    }
 
+    public double getShippingFeePerKg() {
+        return shippingFeePerKg;
+    }
+
+    public void setShippingFeePerKg(double shippingFeePerKg) {
+        this.shippingFeePerKg = shippingFeePerKg;
+    }
 }

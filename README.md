@@ -49,4 +49,7 @@ Entonces al hacer que Product sea una clase abstracta no se tiene que crear un p
 También voy a implementar aquí Comparable<Product> para poder ordenar los productos en la tienda, y voy a implementar compareTo(Product other) para que llamar Collections.sort(productList) organize los productos automáticamente en orden de precio ascendiente (ascendente? no recuerdo)
 También quiero notar que el uso de protected el basePrice en Product es porque si fuera private, las subclases no podrían accederle sin getters. Si fuera public, cualquier otra clase que no tenga nada que ver también tiene acceso, y pues eso no quiero. Entonces protected es la mejor opción aquí porque así las subclases pueden tener acceso exclusivo a estos atributos.
 Finalmente de lo importante en esta parte quiero notar que incluí un contador estático para IDs que aumenta en cantidad cada vez que un constructor de Product es ejecutado y esto debería garantizar que cada producto en la tienda tenga su propio ID automáticamente.
+en este paso no hay mucho más que comentar además de que puse en las subclases los constructores, getters y setters, y métodos necesarios para el funcionamiento de cada una. Incluyendo cambios pequeñitos e importantes como el que los productos digitales no cuentan con precio de envío.
+
+
 
