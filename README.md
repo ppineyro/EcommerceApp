@@ -65,3 +65,10 @@ Luego creé SalesReceipt, que desde el inicio tengo en mente que tiene que ser p
 en SalesReceipt si en this.items yo hubiera puesto this.items = items; en lugar de this.items = new ArrayList<>(items); alguna clase ajena podría todavía tener alguna referencia a esa lista original y agregarle o quitarle objetos después de que el recibo fuera generado. Si está envuelto de esta manera la clase SalesReceipt tiene su propia copia de como estuvo la lista en el momento de impresión.
 Similarmente getItems() retorna new ArrayList<>(items) para que en caso de que alguna clase o método llame a ver los objetos en el recibo, les da una copia, para que no puedan limpiar o modificar de otro modo la lista interna que de verdad tiene el recibo.
 Finalmente en esta parte tengo el printReceipt que pues solo le da formato al recibo para que se vea bonito.
+
+Ahora toca implementar el StoreConfig en el cual voy a aplicar el patrón singleton y las tres formas de descuento que implementarán DiscountStrategy.
+StoreConfig contiene datos que deben ser globales como el nombre de la tienda y cosas como el tipo de moneda y la tasa de impuestos. Para evitar tener varios objetos de configuración pues ponemos todo aquí.
+Para volverlo un singleton pues el constructor lo voy a hacer privado, voy a hacer un private static StoreConfig instance; dentro de la clase y pondré un método getInstance() público estático. 
+Ya que está eso avanzo a implementar las opciones que delineé en el diseño del patrón Strategy para los tipos diferentes de descuento para los productos, haré tres clases, PercentageDiscount, FixedDiscount y NoDiscount que todas implementarán al método DiscountStrategy.
+En el de desc. por porcentaje puse una variable privada double percentage, en el constructor se toma el porcentaje y se valida que sea usable, y en el método se hace el cálculo applyDiscount.
+En el de descuento fijo es lo mismo pero con un valor fijo en lugar de un porcentaje, y en el que no aplica descuento pues no se hace nada y se retorna el total igualito.
